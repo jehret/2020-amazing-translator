@@ -1,11 +1,9 @@
 package nz.ac.eit.amazingtranslator;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class RealOneDictonaryTest {
-
 
     @Test
     public void initializeDatasource_shoudReturnInitializedDictionary() {
@@ -15,7 +13,7 @@ public class RealOneDictonaryTest {
     }
 
     @Test
-    public void getFromDatasource_12InFrench_returnDouze(int number, int languageOption) throws LanguageNotSupportedException,NumberOutOfRangeException{
+    public void getFromDatasource_12InFrench_returnDouze() {
         RealOneDictionary dictionary=new RealOneDictionary();
         dictionary.initializeDatasource();
         try {
