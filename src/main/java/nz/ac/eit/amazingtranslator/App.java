@@ -12,16 +12,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        List<String> germanTranslations=new ArrayList<>();
-        germanTranslations.add("Einz");
-        germanTranslations.add("Zwei");
-        germanTranslations.add("Drei");
-        //...
-        List<String> frenchTranslations=new ArrayList<>();
-        frenchTranslations.add("Un");
-        frenchTranslations.add("Deux");
-        frenchTranslations.add("Trois");
-        //...
+        TranslationDictionaries dictionaries = new TranslationDictionaries();
+        dictionaries.setDictionaries(new RealOneDictionary());
+        dictionaries.initializeDictionaries();
 
         System.out.println("What is the number to translate?");
         Scanner scanner=new Scanner(System.in);
@@ -48,12 +41,15 @@ public class App
             System.out.println("The option had to be numeric");
             System.exit(0);
         }
-        //...Check that the option is 1 or 2
 
-        if (option==1){
-            String translated=frenchTranslations.get(number-1);
-            System.out.println(translated);
+        try {
+            System.out.println(dictionaries.getTranslationOf(number, option));
+        } catch (LanguageNotSupportedException e) {
+            System.out.println("Only french and german supported");
+        } catch (NumberOutOfRangeException e) {
+            System.out.println("Number should be between 1 and 30 included");
         }
+
 
     }
 }
