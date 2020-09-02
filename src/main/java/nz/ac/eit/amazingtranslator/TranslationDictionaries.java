@@ -1,30 +1,19 @@
 package nz.ac.eit.amazingtranslator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TranslationDictionaries {
 
-    private IDictionaries dictionaries;
+    private ITranslationDatasource datasource;
 
-    public boolean initializeDictionaries(){
-
-        dictionaries.initializeDatasource();
-        //...
-        return dictionaries.isInitialized();
+    public int initializeDictionaries(){
+        return datasource.initializeDictionaries();
     }
 
     public String getTranslationOf(int number,int languageOption) throws LanguageNotSupportedException,NumberOutOfRangeException{
-
-
-        return dictionaries.getFromDatasource(number,languageOption);
-
-
-
-
+       //100 other lines
+        return datasource.getTranslationOf(number,languageOption);
     }
 
-    public void setDictionaries(IDictionaries dictionaries) {
-        this.dictionaries = dictionaries;
+    public void setDatasource(ITranslationDatasource datasource) {
+        this.datasource = datasource;
     }
 }
