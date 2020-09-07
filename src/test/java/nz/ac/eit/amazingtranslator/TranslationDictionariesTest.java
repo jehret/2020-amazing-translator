@@ -3,6 +3,7 @@ package nz.ac.eit.amazingtranslator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class TranslationDictionariesTest {
 
@@ -11,7 +12,22 @@ public class TranslationDictionariesTest {
     @Before
     public void setup(){
         translationDictionaries=new TranslationDictionaries();
-        translationDictionaries.setDatasource(new TranslationStubDatasource());
+
+        //Stub
+        //translationDictionaries.setDatasource(new TranslationStubDatasource());
+        //Mock
+        ITranslationDatasource mock=Mockito.mock(ITranslationDatasource.class);
+        try {
+            Mockito.when(mock.getTranslationOf(1,1)).thenReturn("Un");
+            Mockito.when(mock.getTranslationOf(2,1)).thenReturn("Deux");
+            Mockito.when(mock.getTranslationOf(12,1)).thenReturn("Douze");
+        } catch (LanguageNotSupportedException e) {
+            e.printStackTrace();
+        } catch (NumberOutOfRangeException e) {
+            e.printStackTrace();
+        }
+        translationDictionaries.setDatasource(mock);
+        //
         translationDictionaries.initializeDictionaries();
     }
 
