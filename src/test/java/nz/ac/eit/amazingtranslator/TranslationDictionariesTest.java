@@ -15,19 +15,25 @@ public class TranslationDictionariesTest {
 
         //Stub
         //translationDictionaries.setDatasource(new TranslationStubDatasource());
+
         //Mock
         ITranslationDatasource mock=Mockito.mock(ITranslationDatasource.class);
+
         try {
             Mockito.when(mock.getTranslationOf(1,1)).thenReturn("Un");
             Mockito.when(mock.getTranslationOf(2,1)).thenReturn("Deux");
             Mockito.when(mock.getTranslationOf(12,1)).thenReturn("Douze");
+            Mockito.when(mock.getTranslationOf(13,1)).thenReturn("Treize");
+            Mockito.when(mock.getReverseTranslationOf("Deux")).thenReturn(2);
+            Mockito.when(mock.getReverseTranslationOf("Trois")).thenReturn(3);
         } catch (LanguageNotSupportedException e) {
             e.printStackTrace();
         } catch (NumberOutOfRangeException e) {
             e.printStackTrace();
         }
+
         translationDictionaries.setDatasource(mock);
-        //
+
         translationDictionaries.initializeDictionaries();
     }
 
@@ -77,6 +83,16 @@ public class TranslationDictionariesTest {
         } catch (LanguageNotSupportedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void getReverseTranslationOf_Deux_return2(){
+        Assert.assertEquals(2,translationDictionaries.getReverseTranslationOf("Deux"));
+    }
+
+    @Test
+    public void getReverseTranslationOf_Trois_return3(){
+        Assert.assertEquals(3,translationDictionaries.getReverseTranslationOf("Trois"));
     }
 
 }

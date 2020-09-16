@@ -6,6 +6,10 @@ public class TranslationStubDatasource implements ITranslationDatasource{
         return 0;
     }
 
+    public int getReverseTranslationOf(String word){
+        return 0;
+    }
+
     @Override
     public String getTranslationOf(int number, int languageOption) throws LanguageNotSupportedException, NumberOutOfRangeException {
 

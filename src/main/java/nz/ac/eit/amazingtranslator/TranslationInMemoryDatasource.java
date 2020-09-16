@@ -2,6 +2,7 @@ package nz.ac.eit.amazingtranslator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TranslationInMemoryDatasource implements ITranslationDatasource {
 
@@ -30,6 +31,19 @@ public class TranslationInMemoryDatasource implements ITranslationDatasource {
         //...
 
         return frenchTranslations.size();
+    }
+
+    public int getReverseTranslationOf(String word){
+
+        List<String> lowerCaseGerman=germanTranslations.stream().map(nextWord -> nextWord.toLowerCase()).collect(Collectors.toList());
+        List<String> lowerCaseFrench=frenchTranslations.stream().map(nextWord -> nextWord.toLowerCase()).collect(Collectors.toList());
+
+        int index=lowerCaseGerman.indexOf(word.toLowerCase());
+        if (index==-1){
+            index=lowerCaseFrench.indexOf(word.toLowerCase());
+        }
+
+        return index+1;
     }
 
     public String getTranslationOf(int number,int languageOption) throws LanguageNotSupportedException,NumberOutOfRangeException{

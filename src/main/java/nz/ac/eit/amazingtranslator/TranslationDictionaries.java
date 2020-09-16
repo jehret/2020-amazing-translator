@@ -13,6 +13,10 @@ public class TranslationDictionaries {
         return datasource.getTranslationOf(number,languageOption);
     }
 
+    public int getReverseTranslationOf(String word){
+        return datasource.getReverseTranslationOf(word);
+    }
+
     public void setDatasource(ITranslationDatasource datasource) {
         this.datasource = datasource;
     }

@@ -16,34 +16,44 @@ public class App
         dictionaries.setDatasource(new TranslationInMemoryDatasource());
         dictionaries.initializeDictionaries();
 
-        System.out.println("What is the number to translate?");
+        System.out.println("What is the number to translate (as a numeric or a word)?");
         Scanner scanner=new Scanner(System.in);
         String numberAsString=scanner.nextLine();
 
         Integer number=null;
+
+        boolean numberToWord=true;
         try {
             number = Integer.parseInt(numberAsString);
             System.out.println(number);
         }
         catch (NumberFormatException nfe) {
-            System.out.println("The number had to be numeric");
-            System.exit(0);
-        }
-        System.out.println("What is language (1-French, 2-German)?");
-        String optionAsString=scanner.nextLine();
-
-        Integer option=null;
-        try {
-            option = Integer.parseInt(optionAsString);
-            System.out.println(option);
-        }
-        catch (NumberFormatException nfe) {
-            System.out.println("The option had to be numeric");
-            System.exit(0);
+            numberToWord=false;
         }
 
+        Integer option = null;
+        if (numberToWord) {
+            System.out.println("What is language (1-French, 2-German)?");
+            String optionAsString = scanner.nextLine();
+
+
+            try {
+                option = Integer.parseInt(optionAsString);
+                System.out.println(option);
+            } catch (NumberFormatException nfe) {
+                System.out.println("The option had to be numeric");
+                System.exit(0);
+            }
+        }
+
         try {
-            System.out.println(dictionaries.getTranslationOf(number, option));
+            if (numberToWord) {
+                System.out.println(dictionaries.getTranslationOf(number, option));
+            }
+            else {
+                System.out.println(dictionaries.getReverseTranslationOf(numberAsString));
+            }
+
         } catch (LanguageNotSupportedException e) {
             System.out.println("Only french and german supported");
         } catch (NumberOutOfRangeException e) {
